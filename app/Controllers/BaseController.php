@@ -55,4 +55,13 @@ abstract class BaseController extends Controller
 
         // E.g.: $this->session = service('session');
     }
+
+    public function view(string $view, array $data = [])
+    {
+        $header = view('layouts/header', $data);
+        $content = view($view, $data);
+        $footer = view('layouts/footer', $data);
+
+        return $header . $content . $footer;
+    }
 }
