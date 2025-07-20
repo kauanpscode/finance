@@ -5,11 +5,10 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Acesso::index');
-
-$routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function($routes) {
-    $routes->get('usuarios', 'User::index');
-    $routes->post('usuarios/salvar', 'User::save');
-});
+$routes->get('/', 'Access::index');
+$routes->get('/access', 'Access::index');
+$routes->post('/access/login', 'Access::login');
+$routes->get('/access/register', 'Access::register');
+$routes->get('/Main', 'Main::index');
 
 $routes->setAutoRoute(false); // Segurança: evita acesso indesejado a métodos públicos

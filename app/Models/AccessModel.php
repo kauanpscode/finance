@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use Config\Database;
 
 class AccessModel extends Model
 {
@@ -24,7 +25,24 @@ class AccessModel extends Model
     protected $beforeInsert   = ['hashPassword'];
     protected $beforeUpdate   = ['hashPassword'];
 
-    protected function hashPassword (array $data) {
+    protected $db;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->db = Database::connect();
+    }
+
+    public function get(string $email): array | null
+    {
+        $sql = "SELECT * FROM {$this->table} WHERE email = ?";
+        $query = $this->db->query($sql, [$email]);
+
+        return $query->getRowArray();
+    }
+
+    protected function hashPassword(array $data)
+    {
         if (isset($data['data']['password'])) {
             $data['data']['password'] = password_hash($data['data']['password'], PASSWORD_DEFAULT);
         }
