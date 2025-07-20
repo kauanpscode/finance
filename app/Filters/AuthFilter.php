@@ -8,6 +8,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class AuthFilter implements FilterInterface
 {
+    protected $uri;
     protected $allowedRoutes = [
         'access',
         'access/login',
@@ -16,7 +17,7 @@ class AuthFilter implements FilterInterface
     ];
     public function before(RequestInterface $request, $arguments = null)
     {
-        $uri = strtolower($request->uri->getPath());
+        $uri = strtolower($request->getUri()->getPath());
 
         if (in_array($uri, $this->allowedRoutes)) {
             return;
