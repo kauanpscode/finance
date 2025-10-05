@@ -7,7 +7,7 @@ use CodeIgniter\Router\RouteCollection;
 */
 
 $routes->setDefaultMethod('index');
-$routes->setDefaultController('Access');
+$routes->setDefaultController('Access/index');
 $routes->setAutoRoute(true); 
 
 $routes->get('/Main', 'Main::index');

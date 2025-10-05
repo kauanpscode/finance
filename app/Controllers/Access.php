@@ -18,7 +18,7 @@ class Access extends BaseController
             return redirect()->to('/Main');
         }
 
-        return view('access/access');
+        return view('access/login');
     }
 
     public function register(): string | ResponseInterface
