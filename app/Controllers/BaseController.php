@@ -62,6 +62,6 @@ abstract class BaseController extends Controller
         $content = view($view, $data);
         $footer = view('layouts/footer', $data);
 
-        return $header . $content . $footer;
+        return $header  . $content . $footer;
     }
 }
