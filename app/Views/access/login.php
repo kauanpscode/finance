@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,6 +10,9 @@
   <meta name="description" content="Acesse sua conta na plataforma Finance.">
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#007bff">
+  <meta name="csrf-token" content="<?= csrf_hash() ?>">
+  <meta name="csrf-header" content="<?= csrf_header() ?>">
+  <meta name="csrf-name" content="<?= csrf_token() ?>">
 
   <!-- Fonts e ícones -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css" crossorigin="anonymous">
@@ -31,7 +35,7 @@
       <div class="card-body">
         <p class="login-box-msg fs-5">Acesse sua conta</p>
 
-        <form action="<?= base_url('auth/login') ?>" method="post" id="loginForm" novalidate>
+        <form action="<?= base_url('access/login') ?>" method="post" id="loginForm" novalidate>
           <div class="form-floating mb-3">
             <input type="email" id="loginEmail" name="email" class="form-control" placeholder="email@exemplo.com" required autocomplete="email">
             <label for="loginEmail"><i class="bi bi-envelope me-1"></i> Email</label>
@@ -77,10 +81,49 @@
       const sidebarWrapper = document.querySelector('.sidebar-wrapper');
       if (sidebarWrapper && window.OverlayScrollbarsGlobal?.OverlayScrollbars) {
         OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
-          scrollbars: { theme: 'os-theme-light', autoHide: 'leave', clickScroll: true },
+          scrollbars: {
+            theme: 'os-theme-light',
+            autoHide: 'leave',
+            clickScroll: true
+          },
         });
       }
     });
+    document.addEventListener("DOMContentLoaded", () => {
+      const csrfName = document.querySelector('meta[name="csrf-name"]').content;
+      const csrfValue = document.querySelector('meta[name="csrf-token"]').content;
+
+      // adiciona automaticamente o campo hidden a todos os formulários
+      document.querySelectorAll('form').forEach(form => {
+        if (!form.querySelector(`input[name="${csrfName}"]`)) {
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = csrfName;
+          input.value = csrfValue;
+          form.appendChild(input);
+        }
+      });
+    });
+    const csrfHeader = document.querySelector('meta[name="csrf-header"]').content;
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
+    // Monkey patch para fetch
+    const originalFetch = window.fetch;
+    window.fetch = function(url, options = {}) {
+      options.headers = options.headers || {};
+      options.headers[csrfHeader] = csrfToken;
+      return originalFetch(url, options);
+    };
+
+    // jQuery
+    if (window.jQuery) {
+      $.ajaxSetup({
+        headers: {
+          [csrfHeader]: csrfToken
+        }
+      });
+    }
   </script>
 </body>
+
 </html>

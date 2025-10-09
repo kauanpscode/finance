@@ -37,7 +37,7 @@
       <div class="card-body">
         <p class="login-box-msg fs-5">Crie sua conta</p>
 
-        <form action="../index3.html" method="post" novalidate>
+        <form action="<?= base_url('access/register')?>" method="post" novalidate>
           <div class="form-floating mb-3">
             <input type="text" id="registerFullName" name="fullname" class="form-control" placeholder="Seu nome completo" required autocomplete="name">
             <label for="registerFullName"><i class="bi bi-person me-1"></i> Nome completo</label>

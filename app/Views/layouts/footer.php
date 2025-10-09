@@ -53,5 +53,41 @@
 <!--end::Script-->
 </body>
 <!--end::Body-->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const csrfName = document.querySelector('meta[name="csrf-name"]').content;
+    const csrfValue = document.querySelector('meta[name="csrf-token"]').content;
+
+    // adiciona automaticamente o campo hidden a todos os formulários
+    document.querySelectorAll('form').forEach(form => {
+      if (!form.querySelector(`input[name="${csrfName}"]`)) {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = csrfName;
+        input.value = csrfValue;
+        form.appendChild(input);
+      }
+    });
+  });
+  const csrfHeader = document.querySelector('meta[name="csrf-header"]').content;
+  const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
+  // Monkey patch para fetch
+  const originalFetch = window.fetch;
+  window.fetch = function(url, options = {}) {
+    options.headers = options.headers || {};
+    options.headers[csrfHeader] = csrfToken;
+    return originalFetch(url, options);
+  };
+
+  // jQuery
+  if (window.jQuery) {
+    $.ajaxSetup({
+      headers: {
+        [csrfHeader]: csrfToken
+      }
+    });
+  }
+</script>
 
 </html>
