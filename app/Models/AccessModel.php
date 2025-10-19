@@ -12,7 +12,8 @@ class AccessModel extends Model
     protected $useAutoIncrement = 'true';
     protected $returnType = 'object';
     protected $useSoftDeletes = 'false';
-    protected $allowedFields = ['nome', 'email', 'password'];
+    protected $allowedFields = [];
+    protected $protectFields = false;
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
@@ -33,11 +34,44 @@ class AccessModel extends Model
         $this->db = Database::connect();
     }
 
-    public function get(string $email): array | null
+    public function register($data)
     {
-        $sql = "SELECT * FROM {$this->table} WHERE email = ?";
-        $query = $this->db->query($sql, [$email]);
+        $existentUser = $this->getByEmail($data['email']);
 
-        return $query->getRowArray();
+        if ($existentUser) {
+            $res = ['status' => 'error', 'message' => 'E-mail já cadastrado.'];
+            return $res;
+        }
+
+        $this->db->transStart();
+
+        $this->insert($data);
+
+        $this->db->transComplete();
+
+        if ($this->db->transStatus() === false) {
+            $res = ['status' => 'error', 'message' => 'Falha ao registrar usuário.'];
+            return $res;
+        }
+
+        $res = ['status' => 'success', 'message' => 'Usuário registrado com sucesso.'];
+        return $res;
+    }
+
+    public function getByEmail(string $email)
+    {
+        $sql = "SELECT * FROM {$this->table} WHERE email = '$email'";
+        $ret = $this->db->query($sql)->getRow();
+
+        return $ret;
+    }
+
+    protected function hashPassword(array $data)
+    {
+        if (isset($data['data']['password'])) {
+            $data['data']['password'] = password_hash($data['data']['password'], PASSWORD_DEFAULT);
+        }
+
+        return $data;
     }
 }

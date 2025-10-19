@@ -88,6 +88,16 @@
       }
     });
   }
+
+    document.addEventListener('DOMContentLoaded', function () {
+    const toastEl = document.getElementById('liveToast');
+    const toastMessage = '<?= session('toast_error') ?>';
+
+    if (toastMessage.trim() !== '') {
+      const toast = new bootstrap.Toast(toastEl, { delay: 5000 });
+      toast.show();
+    }
+  });
 </script>
 
 </html>

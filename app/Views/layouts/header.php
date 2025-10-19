@@ -16,9 +16,20 @@
 
   <!-- AdminLTE CSS -->
   <link rel="stylesheet" href="<?= base_url('css/adminlte.css') ?>">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 
 <body class="fixed-header sidebar-expand-lg sidebar-open bg-body-tertiary">
+  <div class="position-fixed top-0 end-0 p-3" style="z-index: 1100">
+    <div id="liveToast" class="toast align-items-center text-bg-danger border-0 shadow-lg" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body fw-semibold">
+          <?= session('toast_error') ?>
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Fechar"></button>
+      </div>
+    </div>
+  </div>
 
   <div class="app-wrapper">
     <!-- Header -->

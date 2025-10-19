@@ -7,26 +7,70 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class Access extends BaseController
 {
-    protected $accessModel;
+    protected $model;
     public function __construct()
     {
-        $this->accessModel = new AccessModel();
+        $this->model = new AccessModel();
     }
-    public function index(): string | ResponseInterface
+    public function index($isRegister = false): string | ResponseInterface
     {
         if (session()->get('isLoggedIn')) {
             return redirect()->to('/Main');
         }
 
-        return view('access/login');
+        $data = array(
+            'isRegister' => $isRegister,
+        );
+
+        return view('access/login', $data);
     }
 
-    public function register(): string | ResponseInterface
+    public function register()
     {
-        return view('access/register');
+        $session = session();
+
+        $rules = [
+            'username' => 'required',
+            'email' => 'required|valid_email',
+            'password' => 'required',
+        ];
+
+        $errors = [
+            'username' => [
+                'required' => 'O campo Nome de Usuário é obrigatório.',
+                'min_length' => 'A senha deve ter pelo menos 6 caracteres.'
+            ],
+            'email' => [
+                'required' => 'O campo e-mail é obrigatório.',
+                'valid_email' => 'E-mail inválido.'
+            ],
+            'password' => [
+                'required' => 'O campo senha é obrigatório.',
+                'min_length' => 'A senha deve ter pelo menos 6 caracteres.'
+            ]
+        ];
+
+        if (!$this->validate($rules, $errors)) {
+            $session->setFlashdata('error', 'Por favor, corrija os erros abaixo.');
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+
+        $form = $this->request->getPost();
+
+        if (!empty($form)) {
+            $result = $this->model->register($form);
+
+            if ($result['status'] === 'success') {
+                $session->setFlashdata('success', 'Usuário registrado com sucesso!');
+                return redirect()->to('/Main');
+            } else {
+                $session->setFlashdata('error', $result['message']);
+                return redirect()->back()->withInput();
+            }
+        }
     }
 
-    public function login(): ResponseInterface
+    public function login()
     {
         $session = session();
 
@@ -50,22 +94,21 @@ class Access extends BaseController
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
-        $email = $this->request->getPost('email');
-        $password = $this->request->getPost('password');
+        $form = $this->request->getPost();
 
-        $user = $this->accessModel->get($email);
+        $user = $this->model->getByEmail($form['email']);
 
         if ($user) {
-            if ($user['password'] == $password) {
+            if (password_verify($form['password'], $user->password)) {
 
-                $ses_data = [
-                    'user_id' => $user['id'],
-                    'username' => $user['name'],
-                    'user_email' => $user['email'],
+                $sessionData = [
+                    'user_id' => $user->id,
+                    'username' => $user->username,
+                    'user_email' => $user->email,
                     'isLoggedIn' => TRUE,
                 ];
 
-                $session->set($ses_data);
+                $session->set($sessionData);
 
                 return redirect()->to('/Main');
             } else {
@@ -73,10 +116,11 @@ class Access extends BaseController
                 return redirect()->back()->withInput();
             }
         } else {
-            $session->setFlashdata('error', 'E-mail ou senha incorretos.');
+            $session->setFlashdata('error', 'E-mail ou senha incorreta.');
             return redirect()->back()->withInput();
         }
     }
+
 
     public function logout(): ResponseInterface
     {
