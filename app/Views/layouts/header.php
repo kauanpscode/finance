@@ -69,9 +69,9 @@
         <nav class="mt-2">
           <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="navigation" aria-label="Main navigation" data-accordion="false">
             <li class="nav-item">
-              <a href="<?= base_url('/') ?>" class="nav-link active">
-                <i class="nav-icon bi bi-speedometer"></i>
-                <p>Dashboard</p>
+              <a href="<?= base_url('VideoController') ?>" class="nav-link active">
+                <i class="nav-icon bi bi-play"></i>
+                <p>Filmes</p>
               </a>
             </li>
           </ul>
@@ -84,9 +84,19 @@
       <div class="app-content-header">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-sm-6">
-              <h3 class="mb-0"><?= $page_head['title'] ?></h3>
+            <div class="col-sm-6 d-flex align-items-center gap-2">
+              <h3 class="mb-0">
+                <?= $page_head['title'] ?>
+                <?= !empty($page_head['subtitle']) ? '| ' . $page_head['subtitle'] : '' ?>
+              </h3>
+
+              <?php if (!empty($page_head['btn_novo'])): ?>
+                <a href="<?= base_url($page_head['btn_novo']) ?>" class="btn btn-primary btn-sm ms-3">
+                  <i class="bi bi-plus-circle"></i> Novo
+                </a>
+              <?php endif; ?>
             </div>
+
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-end">
                 <li class="breadcrumb-item"><a href="<?= base_url('/') ?>">Home</a></li>

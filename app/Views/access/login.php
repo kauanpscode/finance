@@ -4,10 +4,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Finance | Login</title>
+  <title>Hermes | Login</title>
 
   <!-- Metadados -->
-  <meta name="description" content="Acesse sua conta na plataforma Finance.">
+  <meta name="description" content="Acesse sua conta na plataforma Hermes.">
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#007bff">
   <meta name="csrf-token" content="<?= csrf_hash() ?>">
@@ -68,7 +68,7 @@
       <div class="card card-outline card-primary shadow">
         <div class="card-header text-center">
           <a href="../index2.html" class="h1 text-decoration-none text-dark">
-            <b>Finance</b>
+            <b>Hermes</b>
           </a>
         </div>
 
@@ -109,7 +109,7 @@
       <div class="card card-outline card-primary shadow">
         <div class="card-header text-center">
           <a href="<?= base_url('/') ?>" class="h1 text-decoration-none text-dark">
-            <b>Finance</b>
+            <b>Hermes</b>
           </a>
         </div>
 

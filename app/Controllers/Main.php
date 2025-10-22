@@ -8,7 +8,7 @@ class Main extends BaseController
 {
     public function index() {
         $page_head = array(
-            'title' => 'Painel de Custos'
+            'title' => 'Home'
         );
 
 

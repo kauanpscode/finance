@@ -1,0 +1,46 @@
+<?php
+
+namespace App\Controllers;
+
+use CodeIgniter\Controller;
+use App\Models\VideoModel;
+
+class VideoController extends BaseController
+{
+    protected $model;
+    public function __construct()
+    {
+        $this->model = new VideoModel;
+    }
+    public function index()
+    {
+
+        $page_head = array(
+            'title' => 'Filmes',
+            'subtitle' => 'Lista',
+            'btn_novo' => 'VideoController/novo',
+
+        );
+
+        $data = array(
+            'page_head' => $page_head,
+            'grid' => $this->model->grid()
+        );
+
+        return $this->view('video/videogrid', $data);
+    }
+
+    public function novo()
+    {
+        $page_head = array(
+            'title' => 'Filmes',
+            'subtitle' => 'Novo',
+        );
+
+        $data = array(
+            'page_head' => $page_head,
+        );
+
+        return $this->view('video/videoform', $data);
+    }
+}
