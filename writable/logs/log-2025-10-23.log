@@ -1,0 +1,49 @@
+DEBUG - 2025-10-23 00:48:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-10-23 00:49:18 --> CSRF token verified.
+DEBUG - 2025-10-23 00:49:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-10-23 00:49:18 --> ErrorException: pg_query(): Query failed: ERROR:  column &quot;titulo&quot; of relation &quot;videos&quot; does not exist
+LINE 1: INSERT INTO videos (titulo, last_user) VALUES (&quot;Teste, 23/10...
+                            ^ in C:\xampp\htdocs\finance\vendor\codeigniter4\framework\system\Database\Postgre\Connection.php:206
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'pg_query(): Que...', 'C:\\xampp\\htdocs...', 206)
+#1 C:\xampp\htdocs\finance\vendor\codeigniter4\framework\system\Database\Postgre\Connection.php(206): pg_query(Object(PgSql\Connection), 'INSERT INTO vid...')
+#2 C:\xampp\htdocs\finance\vendor\codeigniter4\framework\system\Database\BaseConnection.php(738): CodeIgniter\Database\Postgre\Connection->execute('INSERT INTO vid...')
+#3 C:\xampp\htdocs\finance\vendor\codeigniter4\framework\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO vid...')
+#4 C:\xampp\htdocs\finance\app\Models\BaseModel.php(40): CodeIgniter\Database\BaseConnection->query('INSERT INTO vid...')
+#5 C:\xampp\htdocs\finance\app\Models\VideoModel.php(42): App\Models\BaseModel->db_insert('videos', Array)
+#6 C:\xampp\htdocs\finance\app\Controllers\VideoController.php(43): App\Models\VideoModel->novo(Array)
+#7 C:\xampp\htdocs\finance\vendor\codeigniter4\framework\system\CodeIgniter.php(933): App\Controllers\VideoController->novo()
+#8 C:\xampp\htdocs\finance\vendor\codeigniter4\framework\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\VideoController))
+#9 C:\xampp\htdocs\finance\vendor\codeigniter4\framework\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\finance\vendor\codeigniter4\framework\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#11 C:\xampp\htdocs\finance\vendor\codeigniter4\framework\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\xampp\htdocs\finance\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+ERROR - 2025-10-23 00:49:18 --> ErrorException: pg_query(): Query failed: ERROR:  current transaction is aborted, commands ignored until end of transaction block in C:\xampp\htdocs\finance\vendor\codeigniter4\framework\system\Database\Postgre\Connection.php:206
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'pg_query(): Que...', 'C:\\xampp\\htdocs...', 206)
+#1 C:\xampp\htdocs\finance\vendor\codeigniter4\framework\system\Database\Postgre\Connection.php(206): pg_query(Object(PgSql\Connection), 'SELECT LASTVAL(...')
+#2 C:\xampp\htdocs\finance\vendor\codeigniter4\framework\system\Database\BaseConnection.php(738): CodeIgniter\Database\Postgre\Connection->execute('SELECT LASTVAL(...')
+#3 C:\xampp\htdocs\finance\vendor\codeigniter4\framework\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT LASTVAL(...')
+#4 C:\xampp\htdocs\finance\vendor\codeigniter4\framework\system\Database\Postgre\Connection.php(512): CodeIgniter\Database\BaseConnection->query('SELECT LASTVAL(...')
+#5 C:\xampp\htdocs\finance\app\Models\VideoModel.php(44): CodeIgniter\Database\Postgre\Connection->insertID()
+#6 C:\xampp\htdocs\finance\app\Controllers\VideoController.php(43): App\Models\VideoModel->novo(Array)
+#7 C:\xampp\htdocs\finance\vendor\codeigniter4\framework\system\CodeIgniter.php(933): App\Controllers\VideoController->novo()
+#8 C:\xampp\htdocs\finance\vendor\codeigniter4\framework\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\VideoController))
+#9 C:\xampp\htdocs\finance\vendor\codeigniter4\framework\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\finance\vendor\codeigniter4\framework\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#11 C:\xampp\htdocs\finance\vendor\codeigniter4\framework\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\xampp\htdocs\finance\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+CRITICAL - 2025-10-23 00:49:18 --> Error: Call to a member function getRow() on bool
+[Method: POST, Route: VideoController/novo]
+in SYSTEMPATH\Database\Postgre\Connection.php on line 513.
+ 1 APPPATH\Models\VideoModel.php(44): CodeIgniter\Database\Postgre\Connection->insertID()
+ 2 APPPATH\Controllers\VideoController.php(43): App\Models\VideoModel->novo([...])
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\VideoController->novo()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\VideoController))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-10-23 00:49:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

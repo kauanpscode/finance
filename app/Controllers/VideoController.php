@@ -37,6 +37,13 @@ class VideoController extends BaseController
             'subtitle' => 'Novo',
         );
 
+        $form = $this->request->getPost();
+
+        if (!empty($form)) {
+            $this->model->novo($form);
+        }
+
+
         $data = array(
             'page_head' => $page_head,
         );

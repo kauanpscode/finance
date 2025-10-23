@@ -4,7 +4,7 @@
       <h3 class="card-title mb-0"><i class="bi bi-upload"></i> Enviar Novo Vídeo</h3>
     </div>
 
-    <form action="<?= base_url('VideoController/salvar') ?>" method="post" enctype="multipart/form-data">
+    <form action="<?= base_url('VideoController/novo') ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
       <div class="card-body">
