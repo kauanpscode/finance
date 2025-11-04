@@ -1,0 +1,29 @@
+CRITICAL - 2025-11-03 10:50:55 --> Error: Class "Locale" not found
+[Method: GET, Route: /]
+in SYSTEMPATH/CodeIgniter.php on line 189.
+ 1 SYSTEMPATH/Boot.php(321): CodeIgniter\CodeIgniter->initialize()
+ 2 SYSTEMPATH/Boot.php(66): CodeIgniter\Boot::initializeCodeIgniter()
+ 3 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+CRITICAL - 2025-11-03 10:50:55 --> ErrorException: Uncaught Error: Class "Locale" not found in /var/www/html/finance/vendor/codeigniter4/framework/system/Helpers/number_helper.php:142
+Stack trace:
+#0 /var/www/html/finance/vendor/codeigniter4/framework/system/Helpers/number_helper.php(60): format_number()
+#1 /var/www/html/finance/vendor/codeigniter4/framework/system/Debug/BaseExceptionHandler.php(154): number_to_size()
+#2 /var/www/html/finance/app/Views/errors/html/error_exception.php(408): CodeIgniter\Debug\BaseExceptionHandler::describeMemory()
+#3 /var/www/html/finance/vendor/codeigniter4/framework/system/Debug/BaseExceptionHandler.php(266): include('...')
+#4 /var/www/html/finance/vendor/codeigniter4/framework/system/Debug/BaseExceptionHandler.php(269): CodeIgniter\Debug\BaseExceptionHandler->{closure:CodeIgniter\Debug\BaseExceptionHandler::render():260}()
+#5 /var/www/html/finance/vendor/codeigniter4/framework/system/Debug/ExceptionHandler.php(116): CodeIgniter\Debug\BaseExceptionHandler->render()
+#6 /var/www/html/finance/vendor/codeigniter4/framework/system/Debug/Exceptions.php(162): CodeIgniter\Debug\ExceptionHandler->handle()
+#7 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler()
+#8 {main}
+  thrown
+【Previous Exception】
+Error
+Class "Locale" not found
+#0 /var/www/html/finance/vendor/codeigniter4/framework/system/Boot.php(321): CodeIgniter\CodeIgniter->initialize()
+#1 /var/www/html/finance/vendor/codeigniter4/framework/system/Boot.php(66): CodeIgniter\Boot::initializeCodeIgniter()
+#2 /var/www/html/finance/public/index.php(59): CodeIgniter\Boot::bootWeb()
+#3 {main}
+[Method: GET, Route: /]
+in SYSTEMPATH/Helpers/number_helper.php on line 142.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+DEBUG - 2025-11-03 10:51:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
