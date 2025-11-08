@@ -1,4 +1,3 @@
-<!-- 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 -->
 <!doctype html>
 <html lang="pt-BR" data-bs-theme="dark">
 
