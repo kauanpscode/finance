@@ -1,0 +1,101 @@
+    :root {
+        --primary-color: #0d6efd;
+        --bg-gradient: linear-gradient(135deg, #0d6efd 0%, #6610f2 100%);
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background: var(--bg-gradient);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow-x: hidden;
+    }
+
+    .login-container {
+        backdrop-filter: blur(12px);
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+        padding: 40px 35px;
+        max-width: 420px;
+        width: 100%;
+        color: #fff;
+    }
+
+    .login-container .brand {
+        font-weight: 600;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        text-align: center;
+        color: #fff;
+    }
+
+    .login-container .form-control {
+        border-radius: 10px;
+        border: none;
+        padding: 14px;
+        background-color: rgba(255, 255, 255, 0.2);
+        color: #fff;
+    }
+
+    .login-container .form-control:focus {
+        box-shadow: 0 0 0 2px var(--primary-color);
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .login-container label {
+        color: #ddd;
+    }
+
+    .btn-primary {
+        background-color: var(--primary-color);
+        border: none;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #084cd4;
+        transform: scale(1.03);
+    }
+
+    .login-container a {
+        color: #fff;
+        text-decoration: underline;
+    }
+
+    .login-container a:hover {
+        color: #e2e2e2;
+    }
+
+    .toast-container {
+        z-index: 1100;
+    }
+
+    .toast {
+        backdrop-filter: blur(8px);
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        border-radius: 12px;
+    }
+
+    @media (max-width: 480px) {
+        .login-container {
+            margin: 20px;
+            padding: 30px 25px;
+        }
+    }
+
+    .fade-in {
+        animation: fadeIn 1s ease forwards;
+        opacity: 0;
+    }
+
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+        }
+    }

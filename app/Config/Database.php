@@ -26,10 +26,10 @@ class Database extends Config
      */
        public array $default = [
            'DSN'        => '',
-           'hostname'   => '192.168.100.22',
+           'hostname'   => '192.168.100.17',
            'username'   => 'postgres',
            'password'   => '2207',
-           'database'   => 'DB_FINANCE',
+           'database'   => 'db_finance',
            'schema'     => 'public',
            'DBDriver'   => 'Postgre',
            'DBPrefix'   => '',

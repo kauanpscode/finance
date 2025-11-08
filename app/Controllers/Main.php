@@ -11,9 +11,9 @@ class Main extends BaseController
             'title' => 'Home'
         );
 
-
         $data = array(
             'page_head' => $page_head,
+            'nome' => $this->session->get('username'),
         );
 
         return $this->view('home', $data);
